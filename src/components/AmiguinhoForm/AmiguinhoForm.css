@@ -1,0 +1,59 @@
+.amiguinho-form-container {
+  background: white;
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 500px;
+  width: 100%;
+}
+
+.form-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+.amiguinho-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.form-input {
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 1.5px solid #eee;
+  font-size: 1rem;
+  transition: var(--transition);
+  background: #fcfcfc;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--secondary);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(216, 30, 91, 0.1);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.form-btn {
+  flex: 1;
+}

@@ -1,0 +1,82 @@
+.amiguinho-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.amiguinho-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.amiguinho-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.amiguinho-breed {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.amiguinho-age {
+  background: var(--bg-light);
+  color: var(--primary);
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: auto;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: var(--transition);
+}
+
+.amiguinho-card:hover .card-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-light);
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
+.btn-icon:hover {
+  background: var(--secondary);
+  color: var(--white);
+}
+
+.btn-icon-delete:hover {
+  background: #f44336;
+}
