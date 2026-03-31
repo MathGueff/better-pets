@@ -16,9 +16,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart, onGoHome, wellBeing 
       <main className="container">
         <section className="hero">
           <div className="hero-content">
-            <h1 className="hero-title">Cuide do Seu Companheiro de Forma Holística.</h1>
+            <h1 className="hero-title">Cuide do Seu Amiguinho da Forma Certa.</h1>
             <p className="hero-subtitle">
-              Acompanhamento integrado de alimentação, hidratação, exercícios e bem-estar para o seu amiguinho.
+              Acompanhamento integrado de alimentação, hidratação, exercícios e bem-estar para o seu amiguinho, tudo em um só lugar.
             </p>
             <button className="btn btn-primary btn-lg" onClick={onStart}>
               Começar Agora
