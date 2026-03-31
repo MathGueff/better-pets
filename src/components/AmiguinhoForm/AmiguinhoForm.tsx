@@ -13,6 +13,12 @@ const AmiguinhoForm: React.FC<AmiguinhoFormProps> = ({ onSubmit, onCancel, initi
     name: '',
     age: 0,
     breed: '',
+    gender: 'M',
+    size: 0,
+    weight: 0,
+    bornDate: new Date().toISOString().split('T')[0],
+    adoptionDate: new Date().toISOString().split('T')[0],
+    photo: '',
   });
 
   useEffect(() => {
@@ -65,7 +71,82 @@ const AmiguinhoForm: React.FC<AmiguinhoFormProps> = ({ onSubmit, onCancel, initi
             value={formData.breed}
             onChange={(e) => setFormData({ ...formData, breed: e.target.value })}
             placeholder="Ex: Labrador"
+            required
           />
+        </div>
+
+        <div className="form-row">
+          <div className="form-group">
+            <label className="form-label">Gênero</label>
+            <select 
+              className="form-input"
+              value={formData.gender}
+              onChange={(e) => setFormData({ ...formData, gender: e.target.value as any })}
+              required
+            >
+              <option value="M">Macho</option>
+              <option value="F">Fêmea</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label className="form-label">URL da Foto</label>
+            <input
+              type="text"
+              className="form-input"
+              value={formData.photo}
+              onChange={(e) => setFormData({ ...formData, photo: e.target.value })}
+              placeholder="https://..."
+            />
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group">
+            <label className="form-label">Peso (kg)</label>
+            <input
+              type="number"
+              className="form-input"
+              value={formData.weight}
+              onChange={(e) => setFormData({ ...formData, weight: Number(e.target.value) })}
+              min="0"
+              step="0.1"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">Tamanho (cm)</label>
+            <input
+              type="number"
+              className="form-input"
+              value={formData.size}
+              onChange={(e) => setFormData({ ...formData, size: Number(e.target.value) })}
+              min="0"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group">
+            <label className="form-label">Data de Nascimento</label>
+            <input
+              type="date"
+              className="form-input"
+              value={formData.bornDate}
+              onChange={(e) => setFormData({ ...formData, bornDate: e.target.value })}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">Data de Adoção</label>
+            <input
+              type="date"
+              className="form-input"
+              value={formData.adoptionDate}
+              onChange={(e) => setFormData({ ...formData, adoptionDate: e.target.value })}
+              required
+            />
+          </div>
         </div>
 
         <div className="form-actions">

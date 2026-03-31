@@ -53,8 +53,23 @@ const PetDashboard: React.FC<PetDashboardProps> = ({
             <div className="card" style={{ background: 'white', padding: '2rem' }}>
               <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                  <div className="pet-photo-container">
+                    <img 
+                      src={selectedPet.photo || '/images/mysterious-dog.png'} 
+                      alt={selectedPet.name} 
+                      style={{ 
+                        width: '80px', 
+                        height: '80px', 
+                        borderRadius: '50%', 
+                        objectFit: 'cover',
+                        border: '4px solid var(--bg-pale)'
+                      }} 
+                    />
+                  </div>
                   <div>
-                    <h2 style={{ fontSize: '2rem', color: 'var(--primary)', marginBottom: '0.2rem' }}>{selectedPet.name}</h2>
+                    <h2 style={{ fontSize: '2rem', color: 'var(--primary)', marginBottom: '0.2rem' }}>
+                      {selectedPet.name} {selectedPet.gender === 'M' ? '♂️' : '♀️'}
+                    </h2>
                     <p style={{ color: 'var(--text-soft)', fontSize: '0.9rem' }}>Painel Holístico de Bem-estar</p>
                   </div>
                   <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -73,44 +88,45 @@ const PetDashboard: React.FC<PetDashboardProps> = ({
               <div className="status-grid">
                 <div className="status-item glass">
                   <div style={{ fontSize: '1.5rem' }}>🍲</div>
-                  <div style={{ fontWeight: 600 }}>{selectedPet.status?.isFull ? 'Satisfeito' : 'Com fome'}</div>
+                  <div style={{ fontWeight: 600 }}>{selectedPet.schedule?.feed.timeExpected ? `Próxima: ${selectedPet.schedule.feed.timeExpected}` : 'Horário não definido'}</div>
                 </div>
                 <div className="status-item glass">
                   <div style={{ fontSize: '1.5rem' }}>💧</div>
-                  <div style={{ fontWeight: 600 }}>{selectedPet.status?.isHidrated ? 'Hidratado' : 'Sede'}</div>
+                  <div style={{ fontWeight: 600 }}>{selectedPet.schedule?.water.timeExpected ? `Próxima: ${selectedPet.schedule.water.timeExpected}` : 'Horário não definido'}</div>
                 </div>
                 <div className="status-item glass">
                   <div style={{ fontSize: '1.5rem' }}>✨</div>
-                  <div style={{ fontWeight: 600 }}>{selectedPet.status?.isHappy ? 'Feliz' : 'Triste'}</div>
+                  <div style={{ fontWeight: 600 }}>{selectedPet.schedule?.walk.timeExpected ? `Lazer: ${selectedPet.schedule.walk.timeExpected}` : 'Horário não definido'}</div>
                 </div>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginTop: '2rem' }}>
                 <section>
-                  <h4 style={{ marginBottom: '1rem', borderBottom: '2px solid var(--bg-pale)', paddingBottom: '0.5rem' }}>Rotina de Alimentação</h4>
+                  <h4 style={{ marginBottom: '1rem', borderBottom: '2px solid var(--bg-pale)', paddingBottom: '0.5rem' }}>Agenda de Hoje</h4>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    {selectedPet.today?.eat.map(item => (
-                      <div key={item.id} className="glass" style={{ padding: '0.8rem', borderRadius: '12px', display: 'flex', justifyContent: 'space-between' }}>
-                        <span>{item.timeExpected} - {item.food}</span>
-                        <span>{item.completed ? '✅' : '⏳'}</span>
-                      </div>
-                    ))}
+                    <div className="glass" style={{ padding: '0.8rem', borderRadius: '12px' }}>
+                      📅 <strong>Fome:</strong> {selectedPet.schedule?.feed.timeExpected || 'Não agendado'}
+                    </div>
+                    <div className="glass" style={{ padding: '0.8rem', borderRadius: '12px' }}>
+                      🚿 <strong>Sede:</strong> {selectedPet.schedule?.water.timeExpected || 'Não agendado'}
+                    </div>
                     <div style={{ marginTop: '1rem', padding: '0.8rem', background: '#fff9e6', borderRadius: '12px', fontSize: '0.8rem', border: '1px dashed #ffd966' }}>
-                      📩 <strong>Placeholder:</strong> Notificação de e-mail agendada para 15min antes.
+                      📩 <strong>Sistema:</strong> Notificação de e-mail agendada para 15min antes.
                     </div>
                   </div>
                 </section>
                 <section>
                   <h4 style={{ marginBottom: '1rem', borderBottom: '2px solid var(--bg-pale)', paddingBottom: '0.5rem' }}>Passeios e Exercícios</h4>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    {selectedPet.today?.walk.map(item => (
-                      <div key={item.id} className="glass" style={{ padding: '0.8rem', borderRadius: '12px', display: 'flex', justifyContent: 'space-between' }}>
-                        <span>Passeio de {item.expectedDuration}</span>
-                        <span>{item.completed ? '✅' : '🚲'}</span>
+                    <div className="glass" style={{ padding: '1rem', borderRadius: '16px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.9rem' }}>
+                        <div><strong>Raça:</strong> {selectedPet.breed}</div>
+                        <div><strong>Gênero:</strong> {selectedPet.gender === 'M' ? 'Macho' : 'Fêmea'}</div>
+                        <div><strong>Peso:</strong> {selectedPet.weight} kg</div>
+                        <div><strong>Tamanho:</strong> {selectedPet.size} cm</div>
+                        <div><strong>Nascimento:</strong> {new Date(selectedPet.bornDate).toLocaleDateString()}</div>
+                        <div><strong>Adoção:</strong> {new Date(selectedPet.adoptionDate).toLocaleDateString()}</div>
                       </div>
-                    ))}
-                    <div style={{ marginTop: '1rem', padding: '0.8rem', background: '#e6f3ff', borderRadius: '12px', fontSize: '0.8rem', border: '1px dashed #66b3ff' }}>
-                      🤖 <strong>IA Suggestion:</strong> Horário ideal para o próximo passeio baseado no clima atual.
                     </div>
                   </div>
                 </section>
