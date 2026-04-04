@@ -33,13 +33,15 @@
 }
 
 .nav-item {
-  font-weight: 500;
-  position: relative;
-  opacity: 0.9;
+  font-weight: 600;
+  color: var(--white);
+  font-size: 1rem;
+  transition: var(--transition);
+  opacity: 1;
 }
 
 .nav-item:hover {
-  opacity: 1;
+  color: var(--secondary);
 }
 
 .nav-item::after {

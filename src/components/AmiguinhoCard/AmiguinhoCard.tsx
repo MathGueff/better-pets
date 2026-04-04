@@ -28,7 +28,11 @@ const AmiguinhoCard: React.FC<AmiguinhoCardProps> = ({ amiguinho, onDelete, onEd
           <h3 className="amiguinho-name">{amiguinho.name}</h3>
           <p className="amiguinho-breed">🐾 {amiguinho.breed}</p>
         </div>
-        <span className="amiguinho-age">{amiguinho.age} {amiguinho.age === 1 ? 'ano' : 'anos'}</span>
+        {amiguinho.age !== undefined && (
+          <span className="amiguinho-age">
+            {amiguinho.age} {amiguinho.age === 1 ? 'ano' : 'anos'}
+          </span>
+        )}
       </div>
       
       <div className="card-actions">

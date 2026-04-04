@@ -7,6 +7,23 @@
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
+  position: relative;
+}
+
+.form-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2rem;
+  color: var(--text-soft);
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.form-close-btn:hover {
+  color: var(--secondary);
 }
 
 .form-title {
@@ -63,16 +80,53 @@
   box-shadow: 0 0 0 4px rgba(216, 30, 91, 0.1);
 }
 
+.form-input.input-error {
+  border-color: #f44336;
+  background: rgba(244, 67, 54, 0.05);
+}
+
+.error-text {
+  color: #f44336;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-top: 0.2rem;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.schedule-section {
+  background: rgba(183, 148, 130, 0.05); /* --accent with transparency */
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  margin: 1rem 0;
+  border: 1px dashed var(--accent);
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .form-actions {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
-  position: sticky;
-  bottom: 0;
-  background: white;
   padding-top: 1rem;
 }
 
 .form-btn {
   flex: 1;
+}
+
+.form-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }

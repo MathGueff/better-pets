@@ -27,7 +27,7 @@ export interface AnimalSchedule {
 export interface Amiguinho {
   _id?: string;
   name: string;
-  age: number;
+  age?: number;
   breed: string;
   photo?: string;
   gender: AnimalGender;
@@ -58,9 +58,29 @@ const enrichAmiguinho = (a: Amiguinho): Amiguinho => ({
 const calculateHealth = (a: Amiguinho): number => {
   // Simple heuristic for now: base health + age penalty
   let score = 85;
-  if (a.age > 10) score -= 10;
+  if (a.age && a.age > 10) score -= 10;
   return score;
 };
+
+export interface ValidationError {
+  field: string;
+  message: string;
+}
+
+export interface ApiErrorResponse {
+  message: string;
+  code: number;
+  status: boolean;
+  error?: ValidationError[];
+}
+
+export class ApiError extends Error {
+  response: ApiErrorResponse;
+  constructor(response: ApiErrorResponse) {
+    super(response.message);
+    this.response = response;
+  }
+}
 
 export const api = {
   async getAmiguinhos(): Promise<Amiguinho[]> {
@@ -86,7 +106,12 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    if (!response.ok) throw new Error('Falha ao criar amiguinho');
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new ApiError(errorData);
+    }
+    
     const json = await response.json();
     return enrichAmiguinho(json.data);
   },
@@ -97,7 +122,12 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    if (!response.ok) throw new Error('Falha ao atualizar amiguinho');
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new ApiError(errorData);
+    }
+    
     const json = await response.json();
     return enrichAmiguinho(json.data);
   },
@@ -106,7 +136,11 @@ export const api = {
     const response = await fetch(`${API_URL}/animals/${id}`, {
       method: 'DELETE',
     });
-    if (!response.ok) throw new Error('Falha ao remover amiguinho');
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new ApiError(errorData);
+    }
   },
 
   async checkBemEstar(): Promise<boolean> {

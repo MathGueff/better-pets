@@ -3,11 +3,10 @@ import './Navbar.css';
 import logoPath from '../../assets/logo.svg';
 
 interface NavbarProps {
-  wellBeing: boolean;
   onGoHome: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ wellBeing, onGoHome }) => {
+const Navbar: React.FC<NavbarProps> = ({ onGoHome }) => {
   return (
     <nav className="navbar">
       <div className="nav-brand" onClick={onGoHome} style={{ cursor: 'pointer' }}>
@@ -17,11 +16,7 @@ const Navbar: React.FC<NavbarProps> = ({ wellBeing, onGoHome }) => {
       
       <div className="nav-links">
         <button onClick={onGoHome} className="nav-item">Início</button>
-        <a href="#" className="nav-item">Amiguinhos</a>
-        <div className="bem-estar-status">
-          <div className={`status-dot ${wellBeing ? 'status-online' : 'status-offline'}`} />
-          Bem-estar do sistema
-        </div>
+        <button onClick={onGoHome} className="nav-item">Amiguinhos</button>
       </div>
     </nav>
   );

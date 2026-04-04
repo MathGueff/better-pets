@@ -5,13 +5,12 @@ import logoPath from '../../assets/logo.svg';
 interface LandingPageProps {
   onStart: () => void;
   onGoHome: () => void;
-  wellBeing: boolean;
 }
 
-const LandingPage: React.FC<LandingPageProps> = ({ onStart, onGoHome, wellBeing }) => {
+const LandingPage: React.FC<LandingPageProps> = ({ onStart, onGoHome }) => {
   return (
     <div className="landing-container">
-      <Navbar wellBeing={wellBeing} onGoHome={onGoHome} />
+      <Navbar onGoHome={onGoHome} />
       
       <main className="container">
         <section className="hero">
@@ -29,7 +28,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart, onGoHome, wellBeing 
               src={logoPath} 
               alt="Better Pets Illustration" 
               className="hero-image"
-              style={{ padding: '2rem', background: 'var(--white)', opacity: 0.9 }}
+              style={{ opacity: 0.9 }}
             />
           </div>
         </section>
