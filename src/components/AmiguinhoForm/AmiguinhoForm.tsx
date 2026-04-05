@@ -74,6 +74,7 @@ const AmiguinhoForm: React.FC<AmiguinhoFormProps> = ({ onSubmit, onCancel, initi
   };
 
   const getFieldError = (fieldName: string) => {
+    if (!Array.isArray(errors)) return null;
     const error = errors.find(err => err.field === fieldName);
     return error ? error.message : null;
   };

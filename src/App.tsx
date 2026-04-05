@@ -28,9 +28,15 @@ function App() {
     try {
       const data = await api.getAmiguinhos();
       setAmiguinhos(data);
-      if (data.length > 0 && !selectedPet) {
+      
+      // Update selectedPet if it was already set
+      if (selectedPet) {
+        const updated = data.find(p => p._id === selectedPet._id);
+        if (updated) setSelectedPet(updated);
+      } else if (data.length > 0) {
         setSelectedPet(data[0]);
       }
+      
       const status = await api.checkBemEstar();
       setWellBeing(status);
     } catch (error) {
